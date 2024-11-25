@@ -1,17 +1,23 @@
+# Import necessary modules
+import os
+from dotenv import load_dotenv
+from pr_agent import cli
+from pr_agent.config_loader import get_settings
+
+# Load the .env file
+load_dotenv()  # This will automatically load variables from the .env file into the environment
+
 print("Hello, World!")
 name = input("Joel Test: ")
 print(f"Hello, {name}!")
 
-from pr_agent import cli
-from pr_agent.config_loader import get_settings
-
 def main():
     print("Starting main function...")  # Debugging line
     
-    # Fill in the following values
-    provider = "github"  # github/gitlab/bitbucket/azure_devops
-    user_token = "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"  # User token
-    openai_key = "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"  # OpenAI key
+    # Get the values from environment variables
+    provider = os.getenv("GIT_PLATFORM")  # github/gitlab/bitbucket/azure_devops
+    user_token = os.getenv("GIT_TOKEN")  # User token
+    openai_key = os.getenv("OPENAI_API_KEY")  # OpenAI key
     pr_url = "https://github.com/ajfizzle/hello-world-python/pull/1"  # PR URL
     command = "/review", "/describe", "/improvee"  # Commands to run
 
